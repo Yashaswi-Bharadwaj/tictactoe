@@ -1,0 +1,190 @@
+#include<iostream>
+#include<stdlib.h>
+#include<stdio.h>
+#include<unistd.h>
+using namespace std;
+
+int grid[9];
+string p1,p2;
+ 
+
+void init()
+{
+
+ /* This is a function called from Main() for the initialization of array elements i.e,
+ every element of the array 'grid[]' will be initialized to 0 */
+
+ for(int i=0;i<9;i++)
+         grid[i]=0;
+
+ cout<<" The positions for the Game are :-\n"; 		//This part is used to instruct the user as how to play the game.
+ for(int i=0;i<9;i++)
+ {
+	if(i%3==0)
+		cout<<"\n====================================================\n";
+          	cout<<"\t"<<i+1<<"\t||";
+ }
+ cout<<"\n===================================================\n";
+ sleep(3);
+}
+
+void display()
+{
+ for(int i=0;i<9;i++)
+ {
+
+  // This function is used to display the contents of the array 'grid[]'everytime when it needs to updated and 
+  displayed.
+
+	 if(i%3==0)
+                 cout<<"\n====================================================\n";
+	 if(grid[i]==1)
+		cout<<"\tX\t||";
+	 if(grid[i]==2)
+		cout<<"\tO\t||";
+	 if(grid[i]==0)
+		cout<<"\t_\t||";
+ }
+ cout<<"\n====================================================\n";
+ sleep(3);
+}
+
+int evaluate()
+{
+
+ // This function is used to check whether any 3 consecutive positions in the array 'grid[]' is occupied by same 
+ player. It needs to check all the possibilities from the given position. If found, it returns the WINNER. Else, 
+ it indicates that the match was drawn.
+ 
+ if(grid[0]==1 && grid[1]==1 && grid[2]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[0]==1 && grid[3]==1 && grid[6]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[0]==1 && grid[4]==1 && grid[8]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[1]==1 && grid[4]==1 && grid[7]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[2]==1 && grid[5]==1 && grid[8]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[2]==1 && grid[4]==1 && grid[6]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[3]==1 && grid[4]==1 && grid[5]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[6]==1 && grid[7]==1 && grid[8]==1)
+ {
+	cout<<p1<<" WINS the game !!! \n";
+	return 1;
+ }
+ 
+ else if(grid[0]==2 && grid[1]==2 && grid[2]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[0]==2 && grid[3]==2 && grid[6]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[0]==2 && grid[4]==2 && grid[8]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[1]==2 && grid[4]==2 && grid[7]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[2]==2 && grid[5]==2 && grid[8]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[2]==2 && grid[4]==2 && grid[6]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[3]==2 && grid[4]==2 && grid[5]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else if(grid[6]==2 && grid[7]==2 && grid[8]==2)
+ {
+	cout<<p2<<" WINS the game !!! \n";
+	return 1;
+ }
+ else
+	cout<<" MATCH DRAWN \n";
+}
+
+ 
+int main()
+{
+ int var1,var2,result=0;
+ system("clear");							        //This is used to clear the screen or terminal.
+ cout<<" Enter First Player Name \n";
+ cin>>p1;
+ cout<<" Enter Second Player Name \n";
+ cin>>p2;							              	//The 2 player's names are given as input.
+ cout<<" System wishes "<<p1<<" & "<<p2<<", GOOD LUCK!!!! \n";
+ init();							              	//Actual Game begins from here.
+ for(int k=0;k<4;k++)
+ {
+P:	system("clear");
+	cout<<" Turn : Player1 \t \t Select your position \n";
+	cin>>var1;
+	if(grid[var1-1]==1 || grid[var1-1]==2)				//To check the whether the selected position is valid or not.
+	{
+		cout<<"Invalid... \n";
+		sleep(2);
+		goto P;
+	}
+	grid[var1-1]=1;
+	display();
+	result=evaluate();
+	if(result==1)
+		return 0;
+
+R:	system("clear");
+	cout<<" Turn : Player2 \t \t Select your position \n";
+	cin>>var2;
+	if((var1==var2) || (grid[var2-1]==1 || grid[var2-1]==2))
+	{
+		cout<<"Invalid... \n";
+		sleep(2);
+		goto R;
+	}
+	grid[var2-1]=2;
+	display();
+	result=evaluate();
+	if(result==1)
+		return 0;
+
+ }
+	
+ return 0;
+} 
