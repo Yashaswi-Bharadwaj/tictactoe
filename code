@@ -155,7 +155,7 @@ int main()
  for(int k=0;k<4;k++)
  {
 P:	system("clear");
-	cout<<" Turn : Player1 \t \t Select your position \n";
+	cout<<p1<<"'s Turn \t \t Select your position \n";
 	cin>>var1;
 	if(grid[var1-1]==1 || grid[var1-1]==2)				//To check the whether the selected position is valid or not.
 	{
@@ -170,7 +170,7 @@ P:	system("clear");
 		return 0;
 
 R:	system("clear");
-	cout<<" Turn : Player2 \t \t Select your position \n";
+	cout<<p2"'s Turn \t \t Select your position \n";
 	cin>>var2;
 	if((var1==var2) || (grid[var2-1]==1 || grid[var2-1]==2))
 	{
